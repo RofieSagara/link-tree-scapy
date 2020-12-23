@@ -45,7 +45,7 @@ def main():
                         href = item.get('href')
                         if href is not None:
                             result.append(Content(item.text, href))
-            write_file = open('link_tree_result.csv', 'a')
+            write_file = open('link_tree_result.csv', 'a', encoding='utf-8')
             for item in result:
                 write_file.write(item.content + ',')
             write_file.write('\n')

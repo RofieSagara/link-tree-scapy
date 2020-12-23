@@ -34,7 +34,7 @@ def main():
         if value == 'w':
             source = browser.page_source
             print('Start crawling and append to result.txt')
-            f = open("result.txt", "a")
+            f = open("result.txt", "a", encoding='utf-8')
             for match in re.finditer(regex, source, re.MULTILINE):
                 try:
                     capture_link = BeautifulSoup(source[match.start():match.end()], 'html.parser').contents[0]['href']
