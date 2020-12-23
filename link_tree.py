@@ -37,14 +37,14 @@ def main():
     file = open("result.txt", 'r')
     lines = file.readlines()
     for line in lines:
-        print('Start crawling with link ', line)
-        response = req.get(line)
-        soup = BeautifulSoup(response.content, 'html.parser').find(id="__next")
-        if len(soup.contents) != 3:
-            print('Check the style probably unique or website already change the view we skip it')
-            continue
-
         try:
+            print('Start crawling with link ', line)
+            response = req.get(line)
+            soup = BeautifulSoup(response.content, 'html.parser').find(id="__next")
+            if len(soup.contents) != 3:
+                print('Check the style probably unique or website already change the view we skip it')
+                continue
+
             data = soup.contents[2].contents[0].contents[0]
             result = [Content('link', line.replace('\n', ''))]
             for it in data.contents[2:]:
