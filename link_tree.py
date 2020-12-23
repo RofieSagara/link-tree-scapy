@@ -1,5 +1,14 @@
+import random
+import time
+
 from bs4 import BeautifulSoup
 import requests as req
+
+
+def random_sleep():
+    rand = random.randint(3, 9)
+    print('Do sleep for ', rand, ' seconds to emulate person')
+    time.sleep(rand)
 
 
 class Content:
@@ -32,8 +41,8 @@ def main():
         response = req.get(line)
         soup = BeautifulSoup(response.content, 'html.parser').find(id="__next")
         if len(soup.contents) != 3:
-            print('Check the style probably unique or website already change the view')
-            return -1
+            print('Check the style probably unique or website already change the view we skip it')
+            continue
 
         try:
             data = soup.contents[2].contents[0].contents[0]
@@ -50,6 +59,7 @@ def main():
                 write_file.write(item.content + ',')
             write_file.write('\n')
             write_file.close()
+            random_sleep()
         except KeyError:
             print('KeyError check the website probably unique or website already change the view.')
         except AttributeError:
